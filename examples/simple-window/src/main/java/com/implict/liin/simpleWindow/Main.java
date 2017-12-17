@@ -23,7 +23,7 @@ public class Main extends Applet {
 
     }
 
-    public void draw(Graphics graphics) {
+    public void draw(Graphics2D graphics) {
         graphics.fillOval(0,0, getWidth(), getHeight());
     }
 }
