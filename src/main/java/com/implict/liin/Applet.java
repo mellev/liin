@@ -69,11 +69,11 @@ public abstract class Applet extends java.applet.Applet implements Runnable
     }
 
     public final void paint(Graphics g) {
-        draw(g);
+        draw((Graphics2D) g);
         super.getGraphics().drawImage(imageBuffer, 0, 0, null);
     }
 
-    protected abstract void draw(Graphics g);
+    protected abstract void draw(Graphics2D g);
 
     protected Thread getThread() {
         return thread;
