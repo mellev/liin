@@ -16,8 +16,9 @@ public class Background extends AbstractDecorator {
 
     @Override
     public void draw(Graphics2D graphics2D, Position position) {
-        graphics2D.setPaint(paint);
-        graphics2D.fill(node.getShape());
-        super.draw(graphics2D, position);
+        Graphics2D inner = (Graphics2D) graphics2D.create(position.getX(), position.getY(), getWidth(), getHeight());
+        inner.setPaint(paint);
+        inner.fill(node.getShape());
+        super.draw(inner, position);
     }
 }

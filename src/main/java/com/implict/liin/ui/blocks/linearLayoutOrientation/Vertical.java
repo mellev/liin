@@ -12,13 +12,14 @@ public class Vertical implements LinearLayoutOrientationInterface {
     private int offsetY = 0;
 
     @Override
-    public void draw(Node node, Graphics2D g) {
-        node.draw(g, new Position(0, offsetY));
+    public void draw(Node node, Graphics2D graphics2D) {
+        Graphics2D inner = (Graphics2D) graphics2D.create(0, offsetY, node.getWidth(), node.getHeight());
+        node.draw(inner, new Position(0, 0));
         offsetY += node.getHeight();
     }
 
     @Override
-    public int getWidth(ArrayList<Node> childs, Node parent, SizeInterface width) {
+    public int getWidth(ArrayList<Node> children, Node parent, SizeInterface width) {
 
         return width.getValue(parent, new SizeInterface() {
 
@@ -26,7 +27,7 @@ public class Vertical implements LinearLayoutOrientationInterface {
             public int getValue(Node parent, SizeInterface child) {
                 int maxSize = 0;
 
-                for(Node item: childs) {
+                for(Node item: children) {
                     if (item.getWidth() > maxSize) {
                         maxSize = item.getWidth();
                     }
@@ -60,19 +61,19 @@ public class Vertical implements LinearLayoutOrientationInterface {
     }
 
     @Override
-    public int getHeight(ArrayList<Node> childs, Node parent, SizeInterface height) {
+    public int getHeight(ArrayList<Node> children, Node parent, SizeInterface height) {
 
         return height.getValue(parent, new SizeInterface() {
 
             @Override
             public int getValue(Node parent, SizeInterface child) {
-                int childsSize = 0;
+                int childrenSize = 0;
 
-                for (Node item: childs) {
-                    childsSize += item.getHeight();
+                for (Node item: children) {
+                    childrenSize += item.getHeight();
                 }
 
-                return childsSize;
+                return childrenSize;
             }
         });
     }

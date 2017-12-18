@@ -8,11 +8,11 @@ import java.util.ArrayList;
 
 public interface LinearLayoutOrientationInterface {
 
-    void draw(Node node, Graphics2D g);
+    void draw(Node node, Graphics2D graphics2D);
 
-    int getHeight(ArrayList<Node> childs, Node parent, SizeInterface height);
+    int getHeight(ArrayList<Node> children, Node parent, SizeInterface height);
 
-    int getWidth(ArrayList<Node> childs, Node parent, SizeInterface width);
+    int getWidth(ArrayList<Node> children, Node parent, SizeInterface width);
 
     int getOffsetX(ArrayList<Node> children, Node item);
 
