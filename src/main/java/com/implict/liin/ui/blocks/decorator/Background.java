@@ -9,9 +9,9 @@ public class Background extends AbstractDecorator {
 
     private Paint paint;
 
-    public Background(Node node, Paint color) {
+    public Background(Node node, Paint paint) {
         super(node);
-        this.paint = color;
+        this.paint = paint;
     }
 
     @Override
@@ -20,5 +20,9 @@ public class Background extends AbstractDecorator {
         inner.setPaint(paint);
         inner.fill(node.getShape());
         super.draw(inner, position);
+    }
+
+    public void setPaint(Paint paint) {
+        this.paint = paint;
     }
 }

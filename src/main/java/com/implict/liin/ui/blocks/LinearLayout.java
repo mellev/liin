@@ -7,8 +7,10 @@ import com.implict.liin.ui.util.Position;
 import com.implict.liin.ui.util.size.SizeInterface;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class LinearLayout extends CompositeNode {
+
     private LinearLayoutOrientationInterface strategy;
 
     public LinearLayout(LinearLayoutOrientationInterface strategy, SizeInterface width, SizeInterface height) {
@@ -24,6 +26,8 @@ public class LinearLayout extends CompositeNode {
         for (Node child : children) {
             this.strategy.draw(child, inner);
         }
+
+        this.strategy.reset();
     }
 
     @Override
@@ -36,4 +40,27 @@ public class LinearLayout extends CompositeNode {
         return this.strategy.getHeight(children, getParent(), height);
     }
 
+    @Override
+    public ArrayList<Node> getChain(Position position) {
+        ArrayList<Node> chain = new ArrayList<>();
+
+        if (pointOnElement(position)) {
+            chain.add(this);
+
+            for (Node node: children) {
+                int localX = position.getX() - strategy.getOffsetX(children, node);
+                int localY = position.getY() - strategy.getOffsetY(children, node);
+
+                Position localPosition = new Position(localX, localY);
+                ArrayList<Node> localChain = node.getChain(localPosition);
+
+                if (localChain.size() > 0) {
+                    chain.addAll(localChain);
+                    break;
+                }
+            }
+        }
+
+        return chain;
+    }
 }

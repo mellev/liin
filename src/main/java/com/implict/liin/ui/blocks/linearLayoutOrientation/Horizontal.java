@@ -60,13 +60,11 @@ public class Horizontal implements LinearLayoutOrientationInterface {
         int offset = 0;
 
         for (Node child: children) {
-
-
-            offset += child.getWidth();
-
             if (child == item) {
                 break;
             }
+
+            offset += child.getWidth();
         }
 
         return offset;
@@ -75,5 +73,10 @@ public class Horizontal implements LinearLayoutOrientationInterface {
     @Override
     public int getOffsetY(ArrayList<Node> children, Node item) {
         return 0;
+    }
+
+    @Override
+    public void reset() {
+        offsetX = 0;
     }
 }

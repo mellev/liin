@@ -1,5 +1,7 @@
 package com.implict.liin.ui;
 
+import com.implict.liin.ui.blocks.Block;
+import com.implict.liin.ui.blocks.Text;
 import com.implict.liin.ui.util.Position;
 import com.implict.liin.ui.util.size.Pixel;
 import com.implict.liin.ui.util.size.SizeInterface;
@@ -65,6 +67,14 @@ public abstract class CompositeNode extends Node {
         });
     }
 
+    public void setWidth(SizeInterface width) {
+        this.width = width;
+    }
+
+    public void setHeight(SizeInterface height) {
+        this.height = height;
+    }
+
     @Override
     public void addChild(Node child) {
         children.add(child);
@@ -98,6 +108,27 @@ public abstract class CompositeNode extends Node {
         for (Node child: children) {
             child.draw(innerGraphics, new Position(0, 0));
         }
+    }
+
+    @Override
+    public ArrayList<Node> getChain(Position position) {
+        ArrayList<Node> chain = new ArrayList<>();
+
+        if (pointOnElement(position)) {
+            chain.add(this);
+
+            ArrayList<Node> lastSubChain = null;
+
+            for (Node node: children) {
+                lastSubChain = node.getChain(position);
+            }
+
+            if (lastSubChain != null) {
+                chain.addAll(lastSubChain);
+            }
+        }
+
+        return chain;
     }
 
     private int getMaxWidthChild() {

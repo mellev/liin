@@ -48,13 +48,11 @@ public class Vertical implements LinearLayoutOrientationInterface {
         int offset = 0;
 
         for (Node child: children) {
-
-
-            offset += child.getHeight();
-
             if (child == item) {
                 break;
             }
+
+            offset += child.getHeight();
         }
 
         return offset;
@@ -76,5 +74,10 @@ public class Vertical implements LinearLayoutOrientationInterface {
                 return childrenSize;
             }
         });
+    }
+
+    @Override
+    public void reset() {
+        offsetY = 0;
     }
 }

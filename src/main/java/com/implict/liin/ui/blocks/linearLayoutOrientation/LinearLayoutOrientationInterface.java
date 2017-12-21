@@ -1,6 +1,7 @@
 package com.implict.liin.ui.blocks.linearLayoutOrientation;
 
 import com.implict.liin.ui.Node;
+import com.implict.liin.ui.util.Position;
 import com.implict.liin.ui.util.size.SizeInterface;
 
 import java.awt.*;
@@ -17,4 +18,6 @@ public interface LinearLayoutOrientationInterface {
     int getOffsetX(ArrayList<Node> children, Node item);
 
     int getOffsetY(ArrayList<Node> children, Node item);
+
+    void reset();
 }

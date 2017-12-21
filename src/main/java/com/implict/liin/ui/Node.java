@@ -1,5 +1,6 @@
 package com.implict.liin.ui;
 
+import com.implict.liin.ui.util.Position;
 import com.implict.liin.ui.util.size.Pixel;
 import com.implict.liin.ui.util.size.SizeInterface;
 
@@ -62,5 +63,20 @@ public abstract class Node implements NodeInterface {
     @Override
     public Shape getShape() {
         return new Rectangle(getWidth(), getHeight());
+    }
+
+    @Override
+    public ArrayList<Node> getChain(Position position) {
+        ArrayList<Node> chain = new ArrayList<Node>();
+
+        if (pointOnElement(position)) {
+            chain.add(this);
+        }
+
+        return chain;
+    }
+
+    protected boolean pointOnElement(Position position) {
+        return getShape().contains(new Point(position.getX(), position.getY()));
     }
 }

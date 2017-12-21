@@ -70,6 +70,22 @@ public abstract class AbstractDecorator extends Node {
         node.draw(graphics2D, position);
     }
 
+    @Override
+    public ArrayList<Node> getChain(Position position) {
+        ArrayList<Node> chain = new ArrayList<>();
+
+        if (pointOnElement(position)) {
+            ArrayList<Node> nodeChain = node.getChain(position);
+
+            if (nodeChain.size() > 0) {
+                chain.add(this);
+                chain.addAll(nodeChain);
+            }
+        }
+
+        return chain;
+    }
+
     public Node getNode() {
         return node;
     }

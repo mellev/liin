@@ -28,4 +28,6 @@ public interface NodeInterface {
     Shape getShape();
 
     ArrayList<Node> getChildren();
+
+    ArrayList<Node> getChain(Position position);
 }
